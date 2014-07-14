@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Igsearch::VERSION
   spec.authors       = ["hayksaakian"]
   spec.email         = ["fakest.id.ever@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Wrapper for Infogroup API. (Unofficial)}
+  spec.description   = %q{Search for groups of people and businesses with this API.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
