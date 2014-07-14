@@ -1,5 +1,9 @@
 require "igsearch/version"
 
 module Igsearch
-  # Your code goes here...
+  class Person
+    def fetch
+      puts "success"
+    end
+  end
 end
