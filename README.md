@@ -1,6 +1,8 @@
 # Igsearch
 
-TODO: Write a gem description
+This is a Ruby gem that makes it easier to talk to the [Infogroup API](http://developer.infoconnect.com/).
+
+Now you can build apps that look up information about people and companies.
 
 ## Installation
 
