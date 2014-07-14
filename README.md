@@ -2,7 +2,8 @@
 
 This is a Ruby gem that makes it easier to talk to the [Infogroup API](http://developer.infoconnect.com/).
 
-Now you can build apps that look up information about people and companies.
+The Infogroup API lets you search for people or businesess based on criteria that would be useful for conducting sales activity.
+
 
 ## Installation
 
@@ -20,7 +21,6 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
 
 ## Contributing
 
