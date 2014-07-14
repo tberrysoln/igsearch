@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["fakest.id.ever@gmail.com"]
   spec.summary       = %q{Wrapper for Infogroup API. (Unofficial)}
   spec.description   = %q{Search for groups of people and businesses with this API.}
-  spec.homepage      = ""
+  spec.homepage      = "http://www.hayksaakian.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
