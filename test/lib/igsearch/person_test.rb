@@ -4,7 +4,7 @@ describe Igsearch do
 
   before do
     Igsearch.configure do |config|
-      
+      config.apikey = "test"
     end
   end
 
@@ -13,7 +13,8 @@ describe Igsearch do
   end
 
   it "must fail" do 
-    assert false, "this should fail"
+    skip
+    # assert false, "this should fail"
   end
 
   it "must access a live API" do
