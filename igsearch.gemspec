@@ -1,6 +1,6 @@
 # coding: utf-8
-# lib = File.expand_path('../lib', __FILE__)
-# $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'igsearch/version'
 
 Gem::Specification.new do |spec|
@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["hayksaakian"]
   spec.email         = ["hayk@skyrealre.com"]
   spec.summary       = %q{Wrapper for Infogroup API. (Unofficial)}
-  spec.description   = %q{Search for groups of people and businesses with this API.}
+  spec.description   = %q{Search through groups of people and businesses with this API.}
   spec.homepage      = "http://www.hayksaakian.com"
   spec.license       = "MIT"
 
