@@ -3,9 +3,9 @@ require 'json'
 
 module Igsearch
 
-  # def self.live_api?
-  #   return false
-  # end
+  def self.live_api?
+    HTTParty.get('http://api.infoconnect.com/v1/').code == 200
+  end
 
   class Person
     include HTTParty
@@ -22,14 +22,19 @@ module Igsearch
       return "success #{Igsearch.apikey}"
     end
 
-    def self.fetch(id, options={})
+    def self.find(id, options={})
 
       response = self.class.get("/#{id}", options)
       return response if response.success?
       raise response.response
     end
-    def search
+
+    def self.counts
     end
+
+    def self.search
+    end
+
     def count
     end
   end
