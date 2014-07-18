@@ -3,14 +3,17 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'igsearch/version'
 
+require 'dotenv'
+Dotenv.load
+
 Gem::Specification.new do |spec|
   spec.name          = "igsearch"
   spec.version       = Igsearch::VERSION
   spec.authors       = ["hayksaakian"]
   spec.email         = ["hayk@skyrealre.com"]
-  spec.summary       = %q{Wrapper for Infogroup API. (Unofficial)}
+  spec.summary       = %q{Wrapper for Infoconnect API. (Unofficial)}
   spec.description   = %q{Search through groups of people and businesses with this API.}
-  spec.homepage      = "http://www.hayksaakian.com"
+  spec.homepage      = "https://www.github.com/hayksaakian/igsearch"
   spec.license       = "MIT"
 
   # files must be commited before they're included in the build
@@ -25,3 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake", "~> 0"
 end
+
+# Dotenv.load(File.expand_path("../#{defined? APP_ENV ? '.'+APP_ENV : ''}.env", __FILE__), File.expand_path("../.env", __FILE__))

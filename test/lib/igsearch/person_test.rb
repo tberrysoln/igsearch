@@ -1,5 +1,5 @@
 require_relative '../../test_helper'
- 
+
 describe Igsearch do
 
   before do
@@ -9,7 +9,7 @@ describe Igsearch do
   end
 
   it "must say hi" do
-    assert(Igsearch::Person.hi.is_a?(String), "something weird is messed up")
+    assert Igsearch::Person.hi.is_a?(String), "something weird is messed up"
   end
 
   it "must access a live API" do
@@ -22,6 +22,7 @@ describe Igsearch do
   end
 
   it "must find bill gates by search" do
+    skip
     person = Igsearch::Person.search({
       :FirstName => "William",
       :LastName => "Gates",
@@ -30,5 +31,4 @@ describe Igsearch do
       })
     assert person.Id == '601223668643', "This is not Bill Gates!"
   end
- 
 end
