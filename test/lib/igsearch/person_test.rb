@@ -18,17 +18,26 @@ describe Igsearch do
 
   it "must find person by id" do 
     person = Igsearch::Person.find('601223668643')
-    assert person.FirstName == "William", "Did not find Bill Gates!"
+    assert person['FirstName'] == "William", "Did not find Bill Gates!"
   end
 
   it "must find bill gates by search" do
-    skip
-    person = Igsearch::Person.search({
+    people = Igsearch::Person.search({
       :FirstName => "William",
       :LastName => "Gates",
       :City => "Redmond",
       :StateProvince => "WA"
       })
-    assert person.Id == '601223668643', "This is not Bill Gates!"
+    person = people.first
+    assert person['Id'] == '601223668643', "This is not Bill Gates!"
+  end
+
+  it "must count rich people named bill gates" do
+    num_people = Igsearch::Person.count({
+      :FirstName => "William",
+      :LastName => "Gates",
+      :ActualIncome => ["400000", "500000"]
+      })
+    assert num_people > 0, "Bill Gates either isnt very rich or couldnt be found"
   end
 end

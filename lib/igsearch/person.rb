@@ -11,9 +11,8 @@ module Igsearch
     include HTTParty
 
     base_uri "api.infoconnect.com/v1/people"
-    # default_params :apikey => Igsearch.apikey
 
-    def initialize(apikey)
+    def initialize(apikey=Igsearch.apikey)
       # this changes it for all instances
       self.class.default_params :apikey => apikey
     end
@@ -24,18 +23,25 @@ module Igsearch
 
     def self.find(id, options={})
 
-      response = self.class.get("/#{id}", options)
-      return response if response.success?
+      response = get("/#{id}", options)
+
+      return response.parsed_response if response.success?
       raise response.response
     end
 
-    def self.counts
+    def self.search(criteria, options={})
+      response = post('/search', {body: criteria})
+
+      return response.parsed_response if response.success?
+      raise response.response
     end
 
-    def self.search
+    def self.count(criteria, options={})
+      response = post('/count', {body: criteria})
+
+      return response.parsed_response["MatchCount"] if response.success?
+      raise response.response
     end
 
-    def count
-    end
   end
 end
