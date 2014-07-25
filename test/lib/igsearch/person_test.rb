@@ -32,10 +32,18 @@ describe Igsearch do
     assert person['Id'] == '601223668643', "This is not Bill Gates!"
   end
 
-  it "must count rich people named bill gates" do
+  it "must find bill gates by raw address" do
+    people = Igsearch::Person.search_raw_address("1 Microsoft Way, Redmond, WA")
+
+    person = people.first
+
+    assert person['Id'] == '601223668643', "This is not Bill Gates!"
+  end
+
+  it "must count rich people named paul allen" do
     num_people = Igsearch::Person.count({
-      :FirstName => "William",
-      :LastName => "Gates",
+      :FirstName => "Paul",
+      :LastName => "Allen",
       :ActualIncome => ["400000", "500000"]
       })
     assert num_people > 0, "Bill Gates either isnt very rich or couldnt be found"

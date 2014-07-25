@@ -13,6 +13,12 @@ module Igsearch
     include HTTParty
 
     base_uri "api.infoconnect.com/v1/people"
+    headers 'Content-Type' => 'application/json', 'Accept' => 'application/json'
+    format :json
+    debug_output $stdout
+
+    # BUG/PROBLEM:
+    # still need to .to_json to send json...
 
     def initialize(apikey=Igsearch.apikey)
       # this changes it for all instances
@@ -28,42 +34,63 @@ module Igsearch
       response = get("/#{id}", options)
 
       return response.parsed_response if response.success?
-      raise response.response
+      handle_error response
     end
 
     def self.search(criteria, options={})
-      response = post('/search', {body: criteria})
+      response = post('/search', :body => criteria.to_json)
 
       return response.parsed_response if response.success?
-      raise response.response
+      handle_error response
     end
 
     def self.search_raw_address(raw_address, options={})
-      p_address = StreetAddress::US.parse(ra)
-      
-      address = self.render_parsed_address_to_api_format(p_address)
+      p_address = StreetAddress::US.parse(raw_address)
+      puts 'parsed address:'
+      puts p_address
+      return if p_address.nil?
 
-      self.search({:AddressParsed => address}, options)
+      address = self.render_parsed_address_to_api_format(p_address)
+      puts 'rendered address'
+      puts address
+      self.search(address, options)
     end
 
     def self.count(criteria, options={})
-      response = post('/count', {body: criteria})
+      response = post('/count', body: criteria.to_json)
 
       return response.parsed_response["MatchCount"] if response.success?
-      raise response.response
+      handle_error response
     end
 
     private
-    def render_parsed_address_to_api_format(address)
+    def self.handle_error(response)
+      raise response.response.code + ' ' + response.response.message # fix this to show resp. code and message
+    end
+
+    def self.render_parsed_address_to_api_format(address)
       ap = {} # address, parsed and rendered for infogroup API
       ap["Number"] = address.number
       ap["PreDirectional"] = address.prefix
       ap["Name"] = address.street
+      # the infoconnect api has different names than
+      # those used by the street_address gem
       ap["Suffix"] = address.street_type # this is not a mistake
       ap["PostDirectional"] = address.suffix # this is not a mistake
+      # for buildings
+      ap["UnitNumber"] = address.unit
+      ap["UnitType"] = address.unit_prefix
       # clean up null keys/values
       ap.delete_if { |k, v| v.nil? }
-      return ap
+      qap = {}
+      qap["AddressParsed"] = ap
+      qap["City"] = address.city
+      qap["StateProvince"] = address.state
+      qap["PostalCode"] = address.postal_code
+
+      qap.delete_if { |k, v| v.nil? }
+      
+      return qap
     end
   end
 end
