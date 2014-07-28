@@ -15,7 +15,7 @@ module Igsearch
     base_uri "api.infoconnect.com/v1/people"
     headers 'Content-Type' => 'application/json', 'Accept' => 'application/json'
     format :json
-    debug_output $stdout
+    # debug_output $stdout
 
     # BUG/PROBLEM:
     # still need to .to_json to send json...
@@ -46,13 +46,10 @@ module Igsearch
 
     def self.search_raw_address(raw_address, options={})
       p_address = StreetAddress::US.parse(raw_address)
-      puts 'parsed address:'
-      puts p_address
-      return if p_address.nil?
+
+      return [] if p_address.nil?
 
       address = self.render_parsed_address_to_api_format(p_address)
-      puts 'rendered address'
-      puts address
       self.search(address, options)
     end
 

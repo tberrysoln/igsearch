@@ -34,7 +34,7 @@ person = Igsearch::Person.search({
   :LastName => "Gates",
   :City => "Redmond",
   :StateProvince => "WA"
-}).first
+}).first # .search returns an array
 # => {"ETag"=>"bd62003e", "Id"=>"601223668643", "Links"=>[{"Href"=>"/v1/people/601223668643", "Rel"=>"self"}], "Address"=>"1 Microsoft Way Bldg 3", "AddressParsed"=>{"Name"=>"Microsoft", "Number"=>"1", "Suffix"=>"Way", "UnitNumber"=>"3", "UnitType"=>"Bldg"}, "City"=>"Redmond", "FirstName"=>"William", "LastName"=>"Gates", "Location"=>{"Latitude"=>47.639661, "Longitude"=>-122.130606}, "MiddleInitial"=>"H", "PostalCode"=>"98052", "StateProvince"=>"WA"} 
 
 3. There is no step 3

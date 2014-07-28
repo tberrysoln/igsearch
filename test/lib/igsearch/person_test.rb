@@ -18,26 +18,31 @@ describe Igsearch do
 
   it "must find person by id" do 
     person = Igsearch::Person.find('601223668643')
+    assert !person.nil?, "No person found by id"
     assert person['FirstName'] == "William", "Did not find Bill Gates!"
   end
 
   it "must find bill gates by search" do
-    people = Igsearch::Person.search({
+    person = Igsearch::Person.search({
       :FirstName => "William",
       :LastName => "Gates",
       :City => "Redmond",
       :StateProvince => "WA"
-      })
-    person = people.first
-    assert person['Id'] == '601223668643', "This is not Bill Gates!"
+      }).first
+    assert !person.nil?, "No person found by search"
+    assert person['Id'] == '601223668643', "This is not the right Bill Gates!"
   end
 
   it "must find bill gates by raw address" do
-    people = Igsearch::Person.search_raw_address("1 Microsoft Way, Redmond, WA")
+    person = Igsearch::Person.search_raw_address("1 Microsoft Way, Redmond, WA").first
+    assert !person.nil?, "No person found by raw address"
+    assert person['Id'] == '601223668643', "This is not Bill Gates' Address!"
+  end
 
-    person = people.first
+  it "must handle bad raw address" do
+    person = Igsearch::Person.search_raw_address("123 Any Street").first
 
-    assert person['Id'] == '601223668643', "This is not Bill Gates!"
+    assert person.nil?, "Did not handle errors properly"
   end
 
   it "must count rich people named paul allen" do
