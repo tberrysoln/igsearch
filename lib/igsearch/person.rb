@@ -83,7 +83,8 @@ module Igsearch
       qap["AddressParsed"] = ap
       qap["City"] = address.city
       qap["StateProvince"] = address.state
-      qap["PostalCode"] = address.postal_code
+      # postal code within an array, as per spec.
+      qap["PostalCode"] = [address.postal_code] unless address.postal_code.nil?
 
       qap.delete_if { |k, v| v.nil? }
       
