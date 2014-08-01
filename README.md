@@ -40,6 +40,18 @@ end
 
 3. There is no step 3
 
+## Progress
+
+APIs Implemented:
+
+- [People](http://developer.infoconnect.com/people)
+
+Not *yet* Implemented:
+
+- [Companies](http://developer.infoconnect.com/companies)
+- [SICs](http://developer.infoconnect.com/sics)
+- [Match](http://developer.infoconnect.com/match)
+
 ## Contributing
 
 1. Fork it ( https://github.com/hayksaakian/igsearch/fork )
