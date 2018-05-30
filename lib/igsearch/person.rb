@@ -5,14 +5,14 @@ require 'json'
 module Igsearch
 
   def self.live_api?
-    HTTParty.get('http://api.infoconnect.com/v1/').code == 200
+    HTTParty.get('https://api.infoconnect.com/v1/', :verify => false).code == 404
   end
 
   # docs: http://developer.infoconnect.com/post-search-0
   class Person
     include HTTParty
 
-    base_uri "api.infoconnect.com/v1/people"
+    base_uri "https://api.infoconnect.com/v1/people"
     headers 'Content-Type' => 'application/json', 'Accept' => 'application/json'
     format :json
     # debug_output $stdout
@@ -38,7 +38,7 @@ module Igsearch
     end
 
     def self.search(criteria, options={})
-      response = post('/search', :body => criteria.to_json)
+      response = post('/search', :body => criteria.to_json, :verify => false)
 
       return response.parsed_response if response.success?
       handle_error response
